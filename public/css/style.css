@@ -93,3 +93,11 @@ body {
     height: 50vh;
 
 }
+
+@media (max-width: 768px) {
+  .show-img {
+    height: 200px;
+    object-fit: cover;
+  }
+  /* Add more custom responsive styles here */
+}

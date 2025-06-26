@@ -195,3 +195,11 @@
   -webkit-transition: background-position .7s;
   transition: background-position .7s;
 }
+
+@media (max-width: 768px) {
+  .show-img {
+    height: 200px;
+    object-fit: cover;
+  }
+  /* Add more custom responsive styles here */
+}
