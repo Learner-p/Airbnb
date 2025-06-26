@@ -203,3 +203,24 @@
   }
   /* Add more custom responsive styles here */
 }
+
+/* Responsive review card styles */
+.review-card {
+  min-width: 0;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .review-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .review-card .card-body {
+    padding: 1rem;
+  }
+  .starability-result {
+    margin-bottom: 0.5rem;
+  }
+}
