@@ -10,7 +10,23 @@ const upload = multer({storage});
 
 router
     .route("/")
-    .get(wrapAsync(listingController.index))
+    .get(wrapAsync(async (req, res) => {
+        const { q } = req.query;
+        let allListings;
+        if (q) {
+            // Simple case-insensitive search on title, location, or country
+            allListings = await Listing.find({
+                $or: [
+                    { title: { $regex: q, $options: "i" } },
+                    { location: { $regex: q, $options: "i" } },
+                    { country: { $regex: q, $options: "i" } }
+                ]
+            });
+        } else {
+            allListings = await Listing.find({});
+        }
+        res.render("listings/index", { allListings, q });
+    }))
     .post(
         isLoggedIn,
         upload.single('listing[image]'),
