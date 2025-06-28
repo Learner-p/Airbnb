@@ -84,11 +84,23 @@
         </div>
     </div>
 
+    <select class="form-select me-2" name="country">
+        <option value="" <%= !country ? "selected" : "" %>>All Countries</option>
+        <option value="United Kingdom" <%= country === "United Kingdom" ? "selected" : "" %>>United Kingdom</option>
+        <option value="India" <%= country === "India" ? "selected" : "" %>>India</option>
+        <option value="Thailand" <%= country === "Thailand" ? "selected" : "" %>>Thailand</option>
+        <option value="Greece" <%= country === "Greece" ? "selected" : "" %>>Greece</option>
+        <option value="Italy" <%= country === "Italy" ? "selected" : "" %>>Italy</option>
+        <option value="Mexico" <%= country === "Mexico" ? "selected" : "" %>>Mexico</option>
+        <option value="Mediterian" <%= country === "Mediterian" ? "selected" : "" %>>Mediterian</option>
+        <!-- Add more countries as needed -->
+    </select>
+
     <% if (typeof q !== "undefined" && q) { %>
-      <h5>Search results for "<%= q %>"</h5>
-      <% if (allListings.length === 0) { %>
-        <p>No listings found.</p>
-      <% } %>
+        <h5>Search results for "<%= q %>"</h5>
+        <% if (allListings.length === 0) { %>
+            <p>No listings found.</p>
+        <% } %>
     <% } %>
 
     <div class="row row-cols-md-3 row-cols-lg-4 row-cols-sm-2">

@@ -10,22 +10,23 @@ const upload = multer({storage});
 
 router
     .route("/")
-    .get(wrapAsync(async (req, res) => {
-        const { q } = req.query;
-        let allListings;
+    .get("/", wrapAsync(async (req, res) => {
+        const { q, country } = req.query;
+        let filter = {};
+
         if (q) {
-            // Simple case-insensitive search on title, location, or country
-            allListings = await Listing.find({
-                $or: [
-                    { title: { $regex: q, $options: "i" } },
-                    { location: { $regex: q, $options: "i" } },
-                    { country: { $regex: q, $options: "i" } }
-                ]
-            });
-        } else {
-            allListings = await Listing.find({});
+            filter.$or = [
+                { title: { $regex: q, $options: "i" } },
+                { location: { $regex: q, $options: "i" } },
+                { country: { $regex: q, $options: "i" } }
+            ];
         }
-        res.render("listings/index", { allListings, q });
+        if (country) {
+            filter.country = country;
+        }
+
+        const allListings = await Listing.find(filter);
+        res.render("listings/index", { allListings, q, country });
     }))
     .post(
         isLoggedIn,
